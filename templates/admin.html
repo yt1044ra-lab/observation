@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>中央監視画面</title>
+
+<meta http-equiv="refresh" content="5">
+
+<style>
+
+body{
+    background:#111;
+    color:white;
+    font-family:Arial;
+    margin:0;
+}
+
+h1{
+    color:#00ff88;
+    margin:10px;
+}
+
+.container{
+    display:flex;
+    height:100vh;
+}
+
+.left{
+    width:70%;
+    padding:15px;
+    box-sizing:border-box;
+}
+
+.right{
+    width:30%;
+    padding:15px;
+    overflow-y:auto;
+
+    background:#1a1a1a;
+    border-left:3px solid #00ff88;
+
+    box-sizing:border-box;
+}
+
+.message-box{
+    margin-bottom:15px;
+}
+
+input{
+    width:70%;
+    padding:10px;
+    font-size:16px;
+}
+
+button{
+    padding:10px 15px;
+    font-size:16px;
+}
+
+.map{
+    position:relative;
+    width:100%;
+    max-width:950px;
+    height:650px;
+    background:#222;
+    border:4px solid white;
+    overflow:hidden;
+}
+
+.area{
+    position:absolute;
+    border:3px solid white;
+    border-radius:12px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    font-weight:bold;
+    text-align:center;
+}
+
+
+/* ラベル */
+
+.label{
+    position:absolute;
+    color:white;
+    font-size:26px;
+}
+
+.entrance{
+    left:100px;
+    top:40px;
+    color:#ff5555;
+}
+
+.backyard-top{
+    left:450px;
+    top:40px;
+}
+
+.backyard-left{
+    left:40px;
+    top:250px;
+    writing-mode:vertical-rl;
+}
+
+
+/* エリア配置 */
+
+.mission1{
+    left:180px;
+    top:210px;
+    width:180px;
+    height:240px;
+}
+
+.mission2{
+    left:90px;
+    top:470px;
+    width:420px;
+    height:140px;
+}
+
+.mission3{
+    left:380px;
+    top:330px;
+    width:170px;
+    height:160px;
+}
+
+.mission4{
+    left:380px;
+    top:120px;
+    width:280px;
+    height:170px;
+}
+
+.mission5{
+    left:580px;
+    top:470px;
+    width:320px;
+    height:140px;
+}
+
+.exit-area{
+    left:690px;
+    top:110px;
+    width:180px;
+    height:320px;
+}
+
+.normal{
+    background:#006600;
+}
+
+.crowd{
+    background:#ffd700;
+    color:black;
+}
+
+.failure{
+    background:#cc0000;
+}
+
+.other{
+    background:#0066ff;
+}
+
+.person{
+    font-size:14px;
+    margin-top:8px;
+}
+
+.status-text{
+    margin-top:5px;
+    font-size:13px;
+}
+
+.history-box{
+    background:#222;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+.history-title{
+    color:#00ff88;
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.log{
+    border-bottom:1px solid #444;
+    padding:5px;
+    font-size:14px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="left">
+
+<h1>中央監視画面</h1>
+
+<div class="message-box">
+
+<form action="/send_message" method="post">
+
+<input
+type="text"
+name="message"
+placeholder="全体連絡を入力">
+
+<button type="submit">
+送信
+</button>
+
+</form>
+
+</div>
+
+<div class="map">
+
+<div class="label entrance">
+入口
+</div>
+
+<div class="label backyard-top">
+バックヤード
+</div>
+
+<div class="label backyard-left">
+バックヤード
+</div>
+
+
+<!-- Mission1 -->
+
+<div class="area mission1
+
+{% if areas['mission1']['status']=='正常' %}
+normal
+{% elif areas['mission1']['status']=='混雑' %}
+crowd
+{% elif areas['mission1']['status']=='故障' %}
+failure
+{% else %}
+other
+{% endif %}
+
+">
+
+Mission1
+
+<div class="person">
+{{ areas["mission1"]["person"] }}
+</div>
+
+<div class="status-text">
+{{ areas["mission1"]["status"] }}
+</div>
+
+</div>
+
+
+<!-- Mission2 -->
+
+<div class="area mission2
+
+{% if areas['mission2']['status']=='正常' %}
+normal
+{% elif areas['mission2']['status']=='混雑' %}
+crowd
+{% elif areas['mission2']['status']=='故障' %}
+failure
+{% else %}
+other
+{% endif %}
+
+">
+
+Mission2
+
+<div class="person">
+{{ areas["mission2"]["person"] }}
+</div>
+
+<div class="status-text">
+{{ areas["mission2"]["status"] }}
+</div>
+
+</div>
+
+
+<!-- Mission3 -->
+
+<div class="area mission3
+
+{% if areas['mission3']['status']=='正常' %}
+normal
+{% elif areas['mission3']['status']=='混雑' %}
+crowd
+{% elif areas['mission3']['status']=='故障' %}
+failure
+{% else %}
+other
+{% endif %}
+
+">
+
+Mission3
+
+<div class="person">
+{{ areas["mission3"]["person"] }}
+</div>
+
+<div class="status-text">
+{{ areas["mission3"]["status"] }}
+</div>
+
+</div>
+
+
+<!-- Mission4 -->
+
+<div class="area mission4
+
+{% if areas['mission4']['status']=='正常' %}
+normal
+{% elif areas['mission4']['status']=='混雑' %}
+crowd
+{% elif areas['mission4']['status']=='故障' %}
+failure
+{% else %}
+other
+{% endif %}
+
+">
+
+Mission4
+
+<div class="person">
+{{ areas["mission4"]["person"] }}
+</div>
+
+<div class="status-text">
+{{ areas["mission4"]["status"] }}
+</div>
+
+</div>
+
+
+<!-- Mission5 -->
+
+<div class="area mission5
+
+{% if areas['mission5']['status']=='正常' %}
+normal
+{% elif areas['mission5']['status']=='混雑' %}
+crowd
+{% elif areas['mission5']['status']=='故障' %}
+failure
+{% else %}
+other
+{% endif %}
+
+">
+
+Mission5
+
+<div class="person">
+{{ areas["mission5"]["person"] }}
+</div>
+
+<div class="status-text">
+{{ areas["mission5"]["status"] }}
+</div>
+
+</div>
+
+
+<!-- EXIT -->
+
+<div class="area exit-area
+
+{% if areas['exit']['status']=='正常' %}
+normal
+{% elif areas['exit']['status']=='混雑' %}
+crowd
+{% elif areas['exit']['status']=='故障' %}
+failure
+{% else %}
+other
+{% endif %}
+
+">
+
+出口
+
+<div class="person">
+{{ areas["exit"]["person"] }}
+</div>
+
+<div class="status-text">
+{{ areas["exit"]["status"] }}
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<div class="history-box">
+
+<div class="history-title">
+現在の全体連絡
+</div>
+
+<p>
+
+{% if message %}
+{{ message }}
+{% else %}
+連絡なし
+{% endif %}
+
+</p>
+
+</div>
+
+<div class="history-box">
+
+<div class="history-title">
+全体連絡履歴
+</div>
+
+{% for msg in messages %}
+
+<div class="log">
+{{ msg.time }} | {{ msg.message }}
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="history-box">
+
+<div class="history-title">
+問題履歴
+</div>
+
+{% for item in incidents %}
+
+<div class="log">
+{{ item.time }}
+|
+{{ item.area }}
+|
+{{ item.person }}
+|
+{{ item.status }}
+</div>
+
+{% endfor %}
+
+</div>
+
+</div> <!-- right -->
+
+</div> <!-- container -->
+
+</body>
+</html>

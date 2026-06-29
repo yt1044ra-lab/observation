@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>管理者ログイン</title>
+
+<style>
+
+body{
+    background:#111;
+    color:white;
+    text-align:center;
+    font-family:Arial;
+    margin-top:100px;
+}
+
+input{
+    padding:10px;
+    font-size:20px;
+    margin:5px;
+}
+
+button{
+    padding:10px 20px;
+    font-size:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>管理者ログイン</h1>
+
+<form action="/admin_auth" method="POST">
+
+<p>担当番号</p>
+<input type="number" name="number">
+
+<p>パスワード</p>
+<input type="password" name="password">
+
+<br><br>
+
+<button type="submit">
+ログイン
+</button>
+
+</form>
+
+</body>
+
+</html>

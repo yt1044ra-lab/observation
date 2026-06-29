@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>ログイン</title>
+
+<style>
+
+body{
+    background:#111;
+    color:white;
+    text-align:center;
+    font-family:Arial;
+    margin-top:100px;
+}
+
+input{
+    padding:10px;
+    font-size:20px;
+}
+
+button{
+    padding:10px 20px;
+    font-size:20px;
+    background:#00ff88;
+    border:none;
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>{{ area }}</h1>
+
+<form action="/authenticate/{{ area }}" method="POST">
+
+<p>担当番号</p>
+
+<input type="number" name="number">
+
+<br><br>
+
+<button type="submit">
+ログイン
+</button>
+
+</form>
+
+</body>
+
+</html>

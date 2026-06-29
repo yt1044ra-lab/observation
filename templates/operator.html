@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>担当画面</title>
+
+<meta http-equiv="refresh" content="5">
+
+<style>
+
+body{
+    background:#111;
+    color:white;
+    text-align:center;
+    font-family:Arial;
+    margin:0;
+}
+
+.header{
+    background:#1a1a1a;
+    border-bottom:3px solid #00ff88;
+    padding:20px;
+}
+
+.area{
+    font-size:42px;
+    color:#00ff88;
+    margin:0;
+}
+
+.name{
+    font-size:24px;
+    margin-top:10px;
+}
+
+.container{
+    padding:30px;
+}
+
+.status-normal{
+    background:#003d22;
+    border:3px solid #00ff88;
+    color:#00ff88;
+    font-size:40px;
+    font-weight:bold;
+    padding:20px;
+    margin:20px auto;
+    width:400px;
+    border-radius:15px;
+}
+
+.status-crowd{
+    background:#665500;
+    border:3px solid yellow;
+    color:yellow;
+    font-size:40px;
+    font-weight:bold;
+    padding:20px;
+    margin:20px auto;
+    width:400px;
+    border-radius:15px;
+}
+
+.status-failure{
+    background:#550000;
+    border:3px solid red;
+    color:red;
+    font-size:40px;
+    font-weight:bold;
+    padding:20px;
+    margin:20px auto;
+    width:400px;
+    border-radius:15px;
+}
+
+.status-other{
+    background:#002f66;
+    border:3px solid #00aaff;
+    color:#00aaff;
+    font-size:40px;
+    font-weight:bold;
+    padding:20px;
+    margin:20px auto;
+    width:400px;
+    border-radius:15px;
+}
+
+.message{
+    background:#222;
+    border:2px solid #00ff88;
+    border-radius:15px;
+    padding:20px;
+    margin:30px auto;
+    width:600px;
+    max-width:90%;
+}
+
+.message h3{
+    color:#00ff88;
+}
+
+.big-button{
+    width:350px;
+    height:80px;
+    font-size:28px;
+    font-weight:bold;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+    margin:10px;
+}
+
+.crowd{
+    background:yellow;
+    color:black;
+}
+
+.failure{
+    background:red;
+    color:white;
+}
+
+.other{
+    background:#0088ff;
+    color:white;
+}
+
+.resolve{
+    background:#00aa00;
+    color:white;
+}
+
+.logout{
+    background:#444;
+    color:white;
+    width:250px;
+    height:70px;
+    font-size:24px;
+}
+
+.logout-area{
+    margin-top:60px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1 class="area">{{ area }}</h1>
+
+<div class="name">
+担当者：{{ name }}
+</div>
+
+</div>
+
+<div class="container">
+
+{% if status == "正常" %}
+
+<div class="status-normal">
+🟢 正常
+</div>
+
+<a href="/report_crowd/{{ area }}/{{ number }}">
+<button class="big-button crowd">
+🟡 混雑
+</button>
+</a>
+
+<br>
+
+<a href="/report_failure/{{ area }}/{{ number }}">
+<button class="big-button failure">
+🔴 故障
+</button>
+</a>
+
+<br>
+
+<a href="/other_form/{{ area }}/{{ number }}">
+<button class="big-button other">
+🔵 その他
+</button>
+</a>
+
+{% elif status == "混雑" %}
+
+<div class="status-crowd">
+🟡 混雑
+</div>
+
+<a href="/resolve/{{ area }}/{{ number }}">
+<button class="big-button resolve">
+🟢 問題解決
+</button>
+</a>
+
+{% elif status == "故障" %}
+
+<div class="status-failure">
+🔴 故障
+</div>
+
+<a href="/resolve/{{ area }}/{{ number }}">
+<button class="big-button resolve">
+🟢 問題解決
+</button>
+</a>
+
+{% elif status == "その他" %}
+
+<div class="status-other">
+🔵 その他
+</div>
+
+<a href="/resolve/{{ area }}/{{ number }}">
+<button class="big-button resolve">
+🟢 問題解決
+</button>
+</a>
+
+{% endif %}
+
+{% if message %}
+<div class="message">
+
+<h3>📢 全体連絡</h3>
+
+<p style="font-size:24px;">
+{{ message }}
+</p>
+
+</div>
+{% endif %}
+
+<div class="logout-area">
+
+<a href="/logout/{{ area }}"
+onclick="return confirm('ログアウトしますか？')">
+
+<button class="logout">
+🚪 ログアウト
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
