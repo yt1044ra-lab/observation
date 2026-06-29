@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request, redirect
 from datetime import datetime
+import os
 
 app = Flask(__name__)
+
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "1234")
 
 USERS = {
     1:"池田", 2:"石川", 3:"今西", 4:"遠藤", 5:"大杉",
@@ -13,8 +16,6 @@ USERS = {
     31:"村上", 32:"森永", 33:"守屋", 34:"矢崎", 35:"山田",
     36:"吉田", 37:"若子", 38:"髙梨"
 }
-
-ADMIN_PASSWORD = "1234"
 
 GLOBAL_MESSAGE = ""
 
